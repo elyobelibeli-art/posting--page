@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Social - Crie seus posts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-blog"></i>
+                <h1>PostSocial</h1>
+            </div>
+            <p class="tagline">Compartilhe suas ideias com o mundo</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Seção para criar posts -->
+            <section class="create-post-section">
+                <h2><i class="fas fa-edit"></i> Criar Novo Post</h2>
+                <p class="section-description">Preencha os campos abaixo para criar um novo post. Após enviar, ele será publicado na nossa plataforma.</p>
+                
+                <form id="post-form" class="post-form">
+                    <div class="form-group">
+                        <label for="post-title"><i class="fas fa-heading"></i> Título do Post</label>
+                        <input 
+                            type="text" 
+                            id="post-title" 
+                            name="post-title" 
+                            placeholder="Digite um título interessante..." 
+                            required
+                            maxlength="100"
+                        >
+                        <div class="char-count" id="title-char-count">0/100 caracteres</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-content"><i class="fas fa-align-left"></i> Conteúdo do Post</label>
+                        <textarea 
+                            id="post-content" 
+                            name="post-content" 
+                            rows="6" 
+                            placeholder="Compartilhe suas ideias, conhecimentos ou experiências..." 
+                            required
+                            maxlength="500"
+                        ></textarea>
+                        <div class="char-count" id="content-char-count">0/500 caracteres</div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="clear-btn" class="btn btn-secondary">
+                            <i class="fas fa-eraser"></i> Limpar
+                        </button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Publicar Post
+                        </button>
+                    </div>
+                    
+                    <div class="form-info">
+                        <i class="fas fa-info-circle"></i> Seu post será enviado para nossa API e aparecerá abaixo após confirmação.
+                    </div>
+                </form>
+            </section>
+
+            <!-- Seção para exibir posts -->
+            <section class="posts-section">
+                <h2><i class="fas fa-newspaper"></i> Posts Publicados</h2>
+                <p class="section-description">Aqui estão os posts que você publicou. Eles foram enviados com sucesso para nossa API.</p>
+                
+                <div class="loading" id="loading-indicator">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Carregando posts...</p>
+                </div>
+                
+                <div id="posts-container" class="posts-container">
+                    <!-- Posts serão renderizados aqui via JavaScript -->
+                    <div class="no-posts" id="no-posts-message">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Nenhum post publicado ainda</h3>
+                        <p>Crie seu primeiro post usando o formulário acima!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3><i class="fas fa-blog"></i> PostSocial</h3>
+                    <p>Uma aplicação para criar e compartilhar posts online.</p>
+                    <p class="api-info">
+                        <i class="fas fa-code"></i> Usando a API: <strong>JSONPlaceholder</strong>
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="https://jsonplaceholder.typicode.com/" target="_blank">API Documentation</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API Docs</a></li>
+                        <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 PostSocial. Desenvolvido para fins educacionais.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal de confirmação -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Post Publicado com Sucesso!</h2>
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Seu post foi enviado para a API e publicado com sucesso.</p>
+                <div class="post-preview">
+                    <h3 id="modal-post-title">Título do Post</h3>
+                    <p id="modal-post-content">Conteúdo do post...</p>
+                </div>
+                <p class="post-id">ID do Post: <span id="modal-post-id">101</span></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="modal-ok-btn">OK, entendi!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
